@@ -1,4 +1,3 @@
-
 require('dotenv').config()
 const mongoose = require('mongoose')
 const JWT = require('jsonwebtoken')
@@ -16,7 +15,7 @@ const userSchema = new Schema({
    password:{
     type:String,
     select:false
-   },  
+   }
 },
 {
     timestamps:true
