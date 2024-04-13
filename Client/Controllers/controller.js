@@ -60,33 +60,25 @@ return res.status(200).json({
        }) 
 }
 }
-// const create = async(req,res)=>{
-//    try {
-//     const {name,file,description,price} = req.body
-//     const user = await User.create(req.body)
-//     return res.status(200).json({
-//         success:true,
-//         message:'User data created!',
-//         user
+const Update = async(req,res)=>{
+try {
+    const user = await ClientModel.findByIdAndUpdate(req.params.id,req.body)
+    return res.status(200).json({
+        success:true,
+        message:'Data Updated Successfully!',
+        user
         
-//     })
-//    } catch (error) {
-//     return res.status(400).json({
-//         success:false,
-//         message:error.message
-//        }) 
-//    }
-// }
-
-// const Update = async()=>{
-
-// }
+    }) 
+} catch (error) {
+    res.status(400).json({
+        success:false,
+        message:error.message
+    })
+}
+}
 const Read = async(req,res)=>{
-    // const Read = async(req,res)=>{
-//  const userId = req.user.id
  try {
-    // const user = await User.findById(userId)
-    const user = await User.find({})
+    const user = await ClientModel.find({})
     return res.status(200).json({
         success:true,
         message:'User Data',
@@ -101,43 +93,32 @@ const Read = async(req,res)=>{
        }) 
 }
 }
-// const Multer = (req,res)=>{
-//    console.log(req.body);
-//    const {name,price,description} = req.body
-//    const image = req.file.filename;
-//    try {
-//     ClientModel.create({name,price,description,image})
-//     res.status(200).json({
-//         success:true,
-//         message:"Form Uploaded Successfully!"
-//     })
-//    } catch (error) {
-//     res.status(400).json({
-//         success:false,
-//         message:error.message
-//     })
-//    }
-
-// }
-
-const getImage = ()=>{
+const getImage = (req,res)=>{
 console.log("Get Image");
 res.sendFile(`R:/Ecommerce Dashboard/Client/Images/${req.params.imagename}`)
 }
-
-
- 
-
-// const Delete = async()=>{
-
-// }
-
-
+const Delete = async(req,res)=>{
+ try {
+    const userId = req.params.id
+    const user = await ClientModel.findByIdAndDelete(userId)
+    return res.status(200).json({
+        success:true,
+        message:'Data Delete Successfully!',
+        user
+        
+    }) 
+ } catch (error) {
+    res.status(400).json({
+                success:false,
+                message:error.message
+            })
+ }
+}
 module.exports = {
     signUp,
     signIn,
-    // Multer,
+    Delete,
+    Update,
     Read,
     getImage
-    // create
 }

@@ -1,14 +1,10 @@
 const express = require('express')
-const { signUp, signIn, Read,Multer,getImage } = require('../Controllers/controller')
-// const Auth = require('../Middleware/Auth.js');
-// const upload = require('../Middleware/multer.js')
+const { signUp, signIn, Read,Delete,getImage,Update } = require('../Controllers/controller')
 const Router = express.Router()
 Router.post('/signup',signUp)
 Router.post('/signin',signIn)
 Router.get('/read',Read)
-// Router.post('/addata',upload,Multer)
 Router.get('/getimage/:imagename',getImage)
-// Router.put('/update',Update)
-// Router.delete('/delete',Delete)
-// Router.post('/create',create)
+Router.put('/update/:id',Update)
+Router.delete('/delete/:id',Delete)
 module.exports = Router;
